@@ -11,6 +11,8 @@
 
    <Container :articleCont="article" />
 
+   <button @click="more">더보기</button>
+
   <div class="footer">
     <ul class="footer-button-plus">
       <input type="file" id="file" class="inputfile" />
@@ -21,7 +23,8 @@
 
 <script>
 import Container from './components/Container';
-import Postdata from './assets/postdata.js'
+import Postdata from './assets/postdata.js';
+import Axios from 'axios';
 
 export default {
   name: "App",
@@ -31,6 +34,27 @@ export default {
   data() {
     return {
       article: Postdata,
+      moreee: 0,
+    }
+  },
+  methods: {
+    more() {
+      Axios.post('URL', {name: 'kim'})
+      .then( success => {
+        console.log(success);
+
+      }) // ajax 요청 성공시
+      .catch( error => {
+        console.log(error);
+        
+      }) // ajax 요청 실패시
+
+      Axios.get(`https://codingapple1.github.io/vue/more${this.moreee}.json`)
+      .then( result => {
+        console.log(result.data, this.article);
+        this.article.push(result.data);
+        this.moreee++;
+      })
     }
   },
 };
