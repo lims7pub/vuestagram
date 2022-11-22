@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Post from "./Post";
+import Post from './Post'
 
 export default {
   name: "Container",
@@ -14,7 +14,7 @@ export default {
   },
   props: {
     articleCont: Array,
-  },
+  }
 };
 </script>
 

@@ -9,7 +9,7 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <Container :articleCont="articleCont" />
+   <Container :articleCont="article" />
 
   <div class="footer">
     <ul class="footer-button-plus">
@@ -20,8 +20,8 @@
 </template>
 
 <script>
-import Container from "./components/Container";
-import Postdata from "./assets/postdata.js";
+import Container from './components/Container';
+import Postdata from './assets/postdata.js'
 
 export default {
   name: "App",
@@ -30,8 +30,8 @@ export default {
   },
   data() {
     return {
-      articleCont: Postdata,
-    };
+      article: Postdata,
+    }
   },
 };
 </script>
