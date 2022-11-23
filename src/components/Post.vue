@@ -1,13 +1,21 @@
 <template>
   <div class="post">
     <div class="post-header">
-      <div class="profile" :style="{ backgroundImage: `url(${articlePost.userImage})` }"></div>
+      <div
+        class="profile"
+        :style="{ backgroundImage: `url(${articlePost.userImage})` }"
+      ></div>
       <span class="profile-name">{{ articlePost.name }}</span>
     </div>
-    <div class="post-body" :style="{ backgroundImage: `url(${articlePost.postImage})` }"></div>
+    <div
+      class="post-body"
+      :style="{ backgroundImage: `url(${articlePost.postImage})` }"
+    ></div>
     <div class="post-content">
       <p>{{ articlePost.likes }} Likes</p>
-      <p><strong>{{ articlePost.filter }}</strong> {{ articlePost.content }}</p>
+      <p>
+        <strong>{{ articlePost.filter }}</strong> {{ articlePost.content }}
+      </p>
       <p class="date">{{ articlePost.date }}</p>
     </div>
   </div>
@@ -18,7 +26,7 @@ export default {
   name: "Post",
   props: {
     articlePost: Object,
-  }
+  },
 };
 </script>
 

@@ -9,9 +9,9 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-   <Container :articleCont="article" />
+  <Container :articleCont="article" :step="step" />
 
-   <button @click="more">더보기</button>
+  <button @click="more">더보기</button>
 
   <div class="footer">
     <ul class="footer-button-plus">
@@ -20,20 +20,26 @@
     </ul>
   </div>
 
-  <div class="tab">
+  <!-- <div class="tab">
     <div v-if="step == 0">내용0</div>
     <div v-if="step == 1">내용1</div>
     <div v-if="step == 2">내용2</div>
     <button @click="step = 0">버튼0</button>
     <button @click="step = 1">버튼1</button>
     <button @click="step = 2">버튼2</button>
-  </div>
+  </div> -->
+
+  
+    <button @click="step = 0">버튼0</button>
+    <button @click="step = 1">버튼1</button>
+    <button @click="step = 2">버튼2</button>
+
 </template>
 
 <script>
-import Container from './components/Container';
-import Postdata from './assets/postdata.js';
-import Axios from 'axios';
+import Container from "./components/Container";
+import Postdata from "./assets/postdata.js";
+import Axios from "axios";
 
 export default {
   name: "App",
@@ -45,27 +51,26 @@ export default {
       step: 0,
       article: Postdata,
       moreview: 0,
-    }
+    };
   },
   methods: {
     more() {
-      Axios.post('URL', {name: 'kim'})
-      .then( success => {
-        console.log(success);
+      Axios.post("URL", { name: "kim" })
+        .then((success) => {
+          console.log(success);
+        }) // ajax 요청 성공시
+        .catch((error) => {
+          console.log(error);
+        }); // ajax 요청 실패시
 
-      }) // ajax 요청 성공시
-      .catch( error => {
-        console.log(error);
-        
-      }) // ajax 요청 실패시
-
-      Axios.get(`https://codingapple1.github.io/vue/more${this.moreview}.json`)
-      .then( result => {
+      Axios.get(
+        `https://codingapple1.github.io/vue/more${this.moreview}.json`
+      ).then((result) => {
         console.log(result.data, this.article);
         this.article.push(result.data);
         this.moreview++;
-      })
-    }
+      });
+    },
   },
 };
 </script>
