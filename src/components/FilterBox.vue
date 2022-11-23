@@ -1,7 +1,6 @@
 <template>
-  <div :class="filter + ' filter-item'" :style="`background-image: url(${image})`">
+  <div @click="fire" :class="filter + ' filter-item'" :style="`background-image: url(${image})`">
     <slot></slot>
-    <button @click="fire">버튼</button>
   </div>
 </template>
 
@@ -14,7 +13,7 @@ export default {
   },
   methods: {
     fire() {
-        this.emitter.emit('applyFilter', this.filter) //발사
+      this.emitter.emit("applyFilter", this.filter); //emit발사
     },
   },
 };
@@ -22,6 +21,7 @@ export default {
 
 <style>
 .filter-item {
+  position: relative;
   width: 100px;
   height: 100px;
   margin: 10px 10px 10px auto;

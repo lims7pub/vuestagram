@@ -1,44 +1,22 @@
 <template>
   <div>
     <div v-if="step == 0">
-      <Post
-        :articlePost="articleCont[i]"
-        v-for="(item, i) in articleCont"
-        :key="i"
-      />
+      <Post :articlePost="articleCont[i]" v-for="(item, i) in articleCont" :key="i" />
     </div>
 
     <div v-if="step == 1">
-      <div
-        class="upload-image"
-        :class="myFilter"
-        :style="`background-image: url(${image})`"
-      ></div>
+      <div class="upload-image" :class="myFilter" :style="`background-image: url(${image})`"></div>
       <div class="filters">
-        <FilterBox
-          :filter="filter"
-          :image="image"
-          v-for="filter in filters"
-          :key="filter"
-        >
+        <FilterBox :filter="filter" :image="image" v-for="filter in filters" :key="filter">
           {{ filter }}
         </FilterBox>
       </div>
     </div>
 
     <div v-if="step == 2">
-      <div
-        class="upload-image"
-        :class="myFilter"
-        :style="`background-image: url(${image})`"
-      ></div>
+      <div class="upload-image" :class="myFilter" :style="`background-image: url(${image})`"></div>
       <div class="write">
-        <textarea
-          @input="$emit('write', $event.target.value)"
-          class="write-box"
-        >
-write!</textarea
-        >
+        <textarea @input="$emit('write', $event.target.value)" class="write-box">write!</textarea>
         <!-- $emit(작명, 데이터) -->
       </div>
     </div>

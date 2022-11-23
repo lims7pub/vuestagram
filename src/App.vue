@@ -54,10 +54,9 @@ export default {
   },
   mounted() {
     this.emitter.on('applyFilter', (filterName)=> {
-
       this.myFilter = filterName;
       console.log(this.myFilter);
-    });
+    }); //emit수신
   },
   methods: {
     more() {
