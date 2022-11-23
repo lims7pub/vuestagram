@@ -1,12 +1,12 @@
 <template>
   <div>
-    
+
     <div v-if="step == 0">
       <Post :articlePost="articleCont[i]" v-for="(item, i) in articleCont" :key="i" />
     </div>
 
     <div v-if="step == 1">
-      <div class="upload-image"></div>
+      <div class="upload-image" :style="`background-image: url(${image})`"></div>
       <div class="filters">
         <div class="filter-1"></div>
         <div class="filter-1"></div>
@@ -17,9 +17,10 @@
     </div>
 
     <div v-if="step == 2">
-      <div class="upload-image"></div>
+      <div class="upload-image" :style="`background-image: url(${image})`"></div>
       <div class="write">
-        <textarea class="write-box">write!</textarea>
+        <textarea @input="$emit('write', $event.target.value)" class="write-box">write!</textarea> 
+        <!-- $emit(작명, 데이터) -->
       </div>
     </div>
 
@@ -37,6 +38,7 @@ export default {
   props: {
     step: Number,
     articleCont: Array,
+    image: String,
   },
 };
 </script>
@@ -46,6 +48,7 @@ export default {
   width: 100%;
   height: 450px;
   background: cornflowerblue;
+  background-position: center;
   background-size: cover;
 }
 .filters {

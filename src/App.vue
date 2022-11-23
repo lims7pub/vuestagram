@@ -1,21 +1,22 @@
 <template>
   <div class="header">
     <ul class="header-button-left">
-      <li>Cancel</li>
+      <li @click="step--">Cancel</li>
     </ul>
     <ul class="header-button-right">
-      <li>Next</li>
+      <li v-if="step == 1" @click="step++">Next</li>
+      <li v-if="step == 2" @click="publish">Regist</li>
     </ul>
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <Container :articleCont="article" :step="step" />
+  <Container @write="myPost = $event" :image="image" :articleCont="article" :step="step" />
 
-  <button @click="more">더보기</button>
+  <!-- <button @click="more">더보기</button> -->
 
   <div class="footer">
     <ul class="footer-button-plus">
-      <input type="file" id="file" class="inputfile" />
+      <input @change="upload" multiple accept="image/*" type="file" id="file" class="inputfile" />
       <label for="file" class="input-plus">+</label>
     </ul>
   </div>
@@ -28,11 +29,6 @@
     <button @click="step = 1">버튼1</button>
     <button @click="step = 2">버튼2</button>
   </div> -->
-
-  
-    <button @click="step = 0">버튼0</button>
-    <button @click="step = 1">버튼1</button>
-    <button @click="step = 2">버튼2</button>
 
 </template>
 
@@ -51,6 +47,8 @@ export default {
       step: 0,
       article: Postdata,
       moreview: 0,
+      image: '',
+      myPost: '',
     };
   },
   methods: {
@@ -71,6 +69,28 @@ export default {
         this.moreview++;
       });
     },
+    upload(ev) {
+      let file = ev.target.files;
+      console.log(file[0].type);
+      let url = URL.createObjectURL(file[0]);
+      console.log(url);
+      this.image = url;
+      this.step = 1;
+    },
+    publish() {
+      const myArticle =  {
+        name: "Lim Sang O",
+        userImage: "https://placeimg.com/100/100/arch",
+        postImage: this.image,
+        likes: 9876,
+        date: "May 15",
+        liked: false,
+        content: this.myPost,
+        filter: "cat"
+      }
+      this.article.unshift(myArticle);
+      this.step = 0;
+    }
   },
 };
 </script>
