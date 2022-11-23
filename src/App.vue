@@ -10,7 +10,7 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <Container @write="myPost = $event" :image="image" :articleCont="article" :step="step" />
+  <Container @write="myPost = $event" :myFilter="myFilter" :image="image" :articleCont="article" :step="step" />
 
   <!-- <button @click="more">더보기</button> -->
 
@@ -49,7 +49,15 @@ export default {
       moreview: 0,
       image: '',
       myPost: '',
+      myFilter: '',
     };
+  },
+  mounted() {
+    this.emitter.on('applyFilter', (filterName)=> {
+
+      this.myFilter = filterName;
+      console.log(this.myFilter);
+    });
   },
   methods: {
     more() {
@@ -86,7 +94,7 @@ export default {
         date: "May 15",
         liked: false,
         content: this.myPost,
-        filter: "cat"
+        filter: this.myFilter,
       }
       this.article.unshift(myArticle);
       this.step = 0;
