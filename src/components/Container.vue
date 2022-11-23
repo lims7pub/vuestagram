@@ -8,11 +8,7 @@
     <div v-if="step == 1">
       <div class="upload-image" :style="`background-image: url(${image})`"></div>
       <div class="filters">
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
+        <FilterBox :image="image" :class="filters[i]" v-for="(item, i) in filters" :key="i"></FilterBox>
       </div>
     </div>
 
@@ -28,17 +24,24 @@
 </template>
 
 <script>
-import Post from "./Post";
+import Post from './Post';
+import FilterBox from './FilterBox';
 
 export default {
   name: "Container",
   components: {
-    Post: Post,
+    Post,
+    FilterBox,
   },
   props: {
     step: Number,
     articleCont: Array,
     image: String,
+  },
+  data() {
+    return {
+      filters: [ "aden", "_1977", "brannan", "brooklyn", "clarendon", "earlybird", "gingham", "hudson", "inkwell", "kelvin", "lark", "lofi", "maven", "mayfair", "moon", "nashville", "perpetua", "reyes", "rise", "slumber", "stinson", "toaster", "valencia", "walden", "willow", "xpro2"],
+    }
   },
 };
 </script>
@@ -54,6 +57,7 @@ export default {
 .filters {
   overflow-x: scroll;
   white-space: nowrap;
+  padding-left: 10px;
 }
 .filter-1 {
   width: 100px;
