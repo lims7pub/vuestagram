@@ -19,6 +19,15 @@
       <label for="file" class="input-plus">+</label>
     </ul>
   </div>
+
+  <div class="tab">
+    <div v-if="step == 0">내용0</div>
+    <div v-if="step == 1">내용1</div>
+    <div v-if="step == 2">내용2</div>
+    <button @click="step = 0">버튼0</button>
+    <button @click="step = 1">버튼1</button>
+    <button @click="step = 2">버튼2</button>
+  </div>
 </template>
 
 <script>
@@ -33,8 +42,9 @@ export default {
   },
   data() {
     return {
+      step: 0,
       article: Postdata,
-      moreee: 0,
+      moreview: 0,
     }
   },
   methods: {
@@ -49,11 +59,11 @@ export default {
         
       }) // ajax 요청 실패시
 
-      Axios.get(`https://codingapple1.github.io/vue/more${this.moreee}.json`)
+      Axios.get(`https://codingapple1.github.io/vue/more${this.moreview}.json`)
       .then( result => {
         console.log(result.data, this.article);
         this.article.push(result.data);
-        this.moreee++;
+        this.moreview++;
       })
     }
   },
