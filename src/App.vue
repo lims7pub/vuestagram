@@ -10,6 +10,14 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
+  <h4>야야야 {{ $store.state.name }} {{ $store.state.age }}</h4>
+  <button @click="$store.commit('nameChange')">이름변경</button>
+  <button @click="$store.commit('ageIncrement', 1)">나이증가</button>
+  <!-- store.js에 $store.commit('함수', 데이터)로 변경 부탁 -->
+
+  <!-- <button @click="$store.state.name = 'Park'">버튼</button> -->
+  <!-- vuex 데이터 컴포넌트 내 직접수정 금지 -->
+
   <Container @write="myPost = $event" :myFilter="myFilter" :image="image" :articleCont="article" :step="step" />
 
   <!-- <button @click="more">더보기</button> -->
