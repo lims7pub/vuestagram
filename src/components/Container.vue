@@ -20,18 +20,24 @@
         <!-- $emit(작명, 데이터) -->
       </div>
     </div>
+
+    <div v-if="step == 3">
+      <MyPage />
+    </div>
   </div>
 </template>
 
 <script>
 import Post from "./Post";
 import FilterBox from "./FilterBox";
+import MyPage from "./MyPage";
 
 export default {
   name: "Container",
   components: {
     Post,
     FilterBox,
+    MyPage,
   },
   props: {
     step: Number,
