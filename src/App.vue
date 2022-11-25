@@ -10,6 +10,11 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
+  <p>{{ name }} {{ age }}</p>
+  <p>{{ myName }} {{ myAge }}</p>
+  <button @click="nameChange">이름변경2</button>
+  <button @click="ageIncrement(1)">나이증가2</button>
+
   <h4>야야야 {{ $store.state.name }} {{ $store.state.age }}</h4>
   <button @click="$store.commit('nameChange')">이름변경</button>
   <button @click="$store.commit('ageIncrement', 1)">나이증가</button>
@@ -22,6 +27,10 @@
   <button @click="$store.dispatch('getData')">더보기</button>
 
   <Container @write="myPost = $event" :myFilter="myFilter" :image="image" :articleCont="article" :step="step" />
+  
+  <!-- <p>{{ now2 }} {{ counter }}</p>
+  <p>{{ now() }} {{ counter }}</p>
+  <button @click="counter++">함수실행</button> -->
 
   <div class="footer">
     <ul class="footer-button-plus">
@@ -42,9 +51,10 @@
 </template>
 
 <script>
-import Container from "./components/Container";
-import Postdata from "./assets/postdata.js";
-import Axios from "axios";
+import Container from "./components/Container"
+import Postdata from "./assets/postdata.js"
+import Axios from "axios"
+import {mapState, mapMutations} from 'vuex'
 
 export default {
   name: "App",
@@ -59,6 +69,7 @@ export default {
       image: '',
       myPost: '',
       myFilter: '',
+      counter: 0,
     };
   },
   mounted() {
@@ -67,7 +78,31 @@ export default {
       console.log(this.myFilter);
     }); //emit수신
   },
+
+  computed: {
+    // now2() {
+    //   return new Date()
+    // }, //현재시간 출력함수 (처음 한번만 실행)
+
+    // computed 함수는 return을 반드시 사용
+    // name() {
+    //   return this.$store.state.name
+    // },
+    // age() {
+    //   return this.$store.state.age
+    // },
+    // 위의 문법 줄이고 싶으면 vuex의 mapState 사용
+    ...mapState([ 'name', 'age', 'likes' ]),
+    // 오브젝트 자료도 쌉가능
+    ...mapState({ myName: 'name', myAge: 'age' }),
+  },
+
   methods: {
+    ...mapMutations([ 'setMore', 'nameChange', 'ageIncrement', 'likesTo' ]),
+
+    // now() {
+    //   return new Date()
+    // }, //현재시간 출력함수 (사용할때마다 실행)
     more() {
       Axios.post("URL", { name: "kim" })
         .then((success) => {
