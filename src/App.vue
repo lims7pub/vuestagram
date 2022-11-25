@@ -18,9 +18,10 @@
   <!-- <button @click="$store.state.name = 'Park'">버튼</button> -->
   <!-- vuex 데이터 컴포넌트 내 직접수정 금지 -->
 
-  <Container @write="myPost = $event" :myFilter="myFilter" :image="image" :articleCont="article" :step="step" />
+  <p>{{ $store.state.more }}</p>
+  <button @click="$store.dispatch('getData')">더보기</button>
 
-  <!-- <button @click="more">더보기</button> -->
+  <Container @write="myPost = $event" :myFilter="myFilter" :image="image" :articleCont="article" :step="step" />
 
   <div class="footer">
     <ul class="footer-button-plus">
